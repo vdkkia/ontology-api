@@ -18,9 +18,11 @@ app.get('/ontology/:term', (req, res) => {
         }
         temp = temp[terms[i]]
     }
+    let o = []
+    getList(temp, o)
     res.setHeader('Content-Type', 'application/json');
     res.writeHead(200)
-    res.end(JSON.stringify(temp))
+    res.end(JSON.stringify(o))
 })
 
 function error(res) {
@@ -28,5 +30,15 @@ function error(res) {
     res.end("Not found!")
 }
 
-app.listen(8080)
+function getList(obj, list) {
+    for (var k in obj) {
+        if (obj[k] instanceof Object) {
+            getList(obj[k], list);
+        } else {
+            list.push(k)
+        }
+    }
+}
+
+app.listen(3006)
 console.log("Application started!")
