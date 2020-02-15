@@ -21,6 +21,7 @@ app.get('/ontology/:term', (req, res) => {
     let o = []
     getList(temp, o)
     res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
     res.writeHead(200)
     res.end(JSON.stringify(o))
 })
