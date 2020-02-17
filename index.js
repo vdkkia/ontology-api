@@ -7,6 +7,9 @@ const ontology = JSON.parse(rawdata);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/ontology/:term', (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    
     const terms = req.params.term.split('.')
     console.log(terms)
     let temp = JSON.parse(JSON.stringify(ontology));
@@ -20,8 +23,6 @@ app.get('/ontology/:term', (req, res) => {
     }
     let o = []
     getList(temp, o)
-    res.setHeader('Content-Type', 'application/json');
-    res.setHeader('Access-Control-Allow-Origin', '*');
     res.writeHead(200)
     res.end(JSON.stringify(o))
 })
