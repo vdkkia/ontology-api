@@ -27,8 +27,7 @@ app.get('/ontology/:term', (req, res) => {
 })
 
 function error(res) {
-    res.writeHead(400)
-    res.end("Not found!")
+    res.status(404).end("Not found!")
 }
 
 function getList(obj, list) {
